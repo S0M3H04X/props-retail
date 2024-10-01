@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, computed } from 'vue'
 import IconRotate from '@/assets/rotate.svg'
 import IconPlay from '@/assets/play.svg'
 import IconRestart from '@/assets/restart.svg'
+
+import { useRoute, watch } from 'vue-router'
 
 
 const API_URL = 'https://staging.yizhiji.com.cn/api/nfc/woodtotem1'
@@ -14,6 +16,19 @@ const showPlay = ref<boolean>(false)
 const showModal = ref<boolean>(false)
 const showRotate = ref<boolean>(true)
 const showHeadphones = ref<boolean>(false)
+
+// Assign routes id
+const route = useRoute()
+console.log(route.params.id)
+const woodtotemData = ref()
+
+watch(
+  () => route.params.id,
+
+  async newID => {
+    woodtotemData.value = await fetchWoodtotem(newId)
+  }
+)
 
 watchEffect(async () => {
   try {
@@ -52,6 +67,8 @@ function handleVideoEnded() {
 
   showModal.value = true
 }
+
+
 
 </script>
 

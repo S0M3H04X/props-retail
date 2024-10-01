@@ -6,7 +6,7 @@ import Home from '@/pages/Home.vue';
 
 const routes = [
   {path: '/', name: 'Home', component: Home},
-  {path: '/woodtotems/:id', component: () => import('@/pages/WoodtotemView.vue')}
+  {path: '/woodtotems/:id', component: () => import('@/pages/WoodtotemShow.vue')}
 ]
 
 export const router = createRouter({
